@@ -181,8 +181,6 @@ public:
 
         QString balanceString = tokenBalance;
         balanceString.append(tokenSymbol);
-        QFontMetrics fmBalance(font);
-        int balanceWidth = fmBalance.width(balanceString);
 
         QRect nameRect(decorationRect.right() + MARGIN, decorationRect.top(), NAME_WIDTH, decorationSize / 2);
         painter->drawText(nameRect, Qt::AlignLeft|Qt::AlignVCenter, clippedName);
@@ -191,6 +189,8 @@ public:
         painter->setFont(font);
         QColor amountColor("#ffffff");
         painter->setPen(amountColor);
+        QFontMetrics fmBalance(font);
+        int balanceWidth = fmBalance.width(balanceString);
         QRect tokenBalanceRect(nameRect.right() + MARGIN, decorationRect.top(), balanceWidth, decorationSize / 2);
         painter->drawText(tokenBalanceRect, Qt::AlignLeft|Qt::AlignVCenter, tokenBalance);
 

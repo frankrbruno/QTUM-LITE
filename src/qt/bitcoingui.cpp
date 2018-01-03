@@ -139,6 +139,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     rpcConsole(0),
     helpMessageDialog(0),
     modalOverlay(0),
+    modalBackupOverlay(0),
     prevBlocks(0),
     spinnerFrame(0),
     platformStyle(_platformStyle)
@@ -285,11 +286,13 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     connect(connectionsControl, SIGNAL(clicked(QPoint)), this, SLOT(toggleNetworkActive()));
 
     modalOverlay = new ModalOverlay(this);
+    modalBackupOverlay = new ModalOverlay(this, ModalOverlay::Backup);
 #ifdef ENABLE_WALLET
     if(enableWallet) {
         connect(walletFrame, SIGNAL(requestedSyncWarningInfo()), this, SLOT(showModalOverlay()));
         connect(labelBlocksIcon, SIGNAL(clicked(QPoint)), this, SLOT(showModalOverlay()));
         connect(progressBar, SIGNAL(clicked(QPoint)), this, SLOT(showModalOverlay()));
+        connect(modalBackupOverlay, SIGNAL(backupWallet()), walletFrame, SLOT(backupWallet()));
     }
 #endif
 
@@ -645,6 +648,10 @@ bool BitcoinGUI::addWallet(const QString& name, WalletModel *walletModel)
         return false;
     setWalletActionsEnabled(true);
     appTitleBar->setModel(walletModel);
+    if(walletModel && !(walletModel->hasWalletBackup()))
+    {
+        showModalBackupOverlay();
+    }
     return walletFrame->addWallet(name, walletModel);
 }
 
@@ -1403,6 +1410,12 @@ void BitcoinGUI::showModalOverlay()
 {
     if (modalOverlay && (progressBar->isVisible() || modalOverlay->isLayerVisible()))
         modalOverlay->toggleVisibility();
+}
+
+void BitcoinGUI::showModalBackupOverlay()
+{
+    if (modalBackupOverlay)
+        modalBackupOverlay->toggleVisibility();
 }
 
 void BitcoinGUI::setTabBarInfo(QObject *into)

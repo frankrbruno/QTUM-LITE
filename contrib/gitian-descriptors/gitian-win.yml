@@ -1,5 +1,5 @@
 ---
-name: "qtum-lite-win-0.14"
+name: "qtumlite-win-0.14"
 enable_cache: true
 suites:
 - "xenial"
@@ -22,17 +22,17 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/qtum-liteproject/qtum-lite.git"
+- "url": "https://github.com/qtumliteproject/qtumlite.git"
   "dir": "qtum-lite"
-- "url": "https://github.com/qtum-liteproject/cpp-eth-qtum-lite.git"
-  "dir": "cpp-eth-qtum-lite"
+- "url": "https://github.com/qtumliteproject/cpp-eth-qtumlite.git"
+  "dir": "cpp-eth-qtumlite"
 files: []
 script: |
   #this is a hack since gitian has no natural support for submodules
-  rm -rf qtum-lite/src/cpp-ethereum
-  cp -r cpp-eth-qtum-lite qtum-lite/src/cpp-ethereum
+  rm -rf qtumlite/src/cpp-ethereum
+  cp -r cpp-eth-qtumlite qtumlite/src/cpp-ethereum
   #make sure this file exists... 
-  cat qtum-lite/src/cpp-ethereum/utils/libscrypt/b64.c 
+  cat qtumlite/src/cpp-ethereum/utils/libscrypt/b64.c 
   
   WRAP_DIR=$HOME/wrapped
   HOSTS="i686-w64-mingw32 x86_64-w64-mingw32"
@@ -109,7 +109,7 @@ script: |
   create_per-host_linker_wrapper "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd qtum-lite
+  cd qtumlite
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -127,14 +127,14 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}/`echo "${HOSTS}" | awk '{print $1;}'`/share/config.site ./configure --prefix=/
   make dist
-  SOURCEDIST=`echo qtum-lite-*.tar.gz`
+  SOURCEDIST=`echo qtumlite-*.tar.gz`
   DISTNAME=`echo ${SOURCEDIST} | sed 's/.tar.*//'`
 
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar xf ../$SOURCEDIST
-  find qtum-lite-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find qtumlite-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   mkdir -p $OUTDIR/src
   cp ../$SOURCEDIST $OUTDIR/src
   popd

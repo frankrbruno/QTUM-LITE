@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Name=Bitcoin Core
 Comment=Connect to the Qtum P2P Network
-Exec=qtum-qt %u
+Exec=qtum-lite-qt %u
 Terminal=false
 Type=Application
-Icon=qtum128
-MimeType=x-scheme-handler/qtum;
+Icon=qtum-lite128
+MimeType=x-scheme-handler/qtum-lite;
 Categories=Office;Finance;

@@ -1,5 +1,5 @@
 ---
-name: "qtum-osx-0.14"
+name: "qtum-lite-osx-0.14"
 enable_cache: true
 suites:
 - "trusty"
@@ -28,18 +28,18 @@ packages:
 - "python-setuptools"
 - "fonts-tuffy"
 remotes:
-- "url": "https://github.com/qtumproject/qtum.git"
-  "dir": "qtum"
-- "url": "https://github.com/qtumproject/cpp-eth-qtum.git"
-  "dir": "cpp-eth-qtum"
+- "url": "https://github.com/qtum-liteproject/qtum-lite.git"
+  "dir": "qtum-lite"
+- "url": "https://github.com/qtum-liteproject/cpp-eth-qtum-lite.git"
+  "dir": "cpp-eth-qtum-lite"
 files:
 - "MacOSX10.11.sdk.tar.gz"
 script: |
   #this is a hack since gitian has no natural support for submodules
-  rm -rf qtum/src/cpp-ethereum
-  cp -r cpp-eth-qtum qtum/src/cpp-ethereum
+  rm -rf qtum-lite/src/cpp-ethereum
+  cp -r cpp-eth-qtum-lite qtum-lite/src/cpp-ethereum
   #make sure this file exists... 
-  cat qtum/src/cpp-ethereum/utils/libscrypt/b64.c 
+  cat qtum-lite/src/cpp-ethereum/utils/libscrypt/b64.c 
 
   WRAP_DIR=$HOME/wrapped
   HOSTS="x86_64-apple-darwin11"
@@ -91,7 +91,7 @@ script: |
   create_per-host_faketime_wrappers "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd qtum
+  cd qtum-lite
   BASEPREFIX=`pwd`/depends
 
   mkdir -p ${BASEPREFIX}/SDKs
@@ -119,7 +119,7 @@ script: |
   mkdir -p temp
   pushd temp
   tar xf ../$SOURCEDIST
-  find qtum-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find qtum-lite-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   popd
 
   ORIGPATH="$PATH"

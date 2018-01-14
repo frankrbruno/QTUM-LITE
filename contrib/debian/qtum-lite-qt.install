@@ -1,6 +1,0 @@
-usr/local/bin/qtum-lite-qt usr/bin
-share/pixmaps/qtum-lite32.xpm usr/share/pixmaps
-share/pixmaps/qtum-lite16.xpm usr/share/pixmaps
-share/pixmaps/qtum-lite128.png usr/share/pixmaps
-debian/qtum-lite-qt.desktop usr/share/applications
-debian/qtumlite-qt.protocol usr/share/kde4/services/

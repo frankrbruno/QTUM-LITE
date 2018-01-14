@@ -1,6 +1,6 @@
 [Protocol]
-exec=qtum-lite-qt '%u'
-protocol=qtum-lite
+exec=qtumlite-qt '%u'
+protocol=qtumlite
 input=none
 output=none
 helper=true

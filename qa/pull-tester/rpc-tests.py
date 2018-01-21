@@ -76,7 +76,7 @@ for arg in sys.argv[1:]:
 
 #Set env vars
 if "BITCOIND" not in os.environ:
-    os.environ["BITCOIND"] = BUILDDIR + '/src/qtumd' + EXEEXT
+    os.environ["BITCOIND"] = BUILDDIR + '/src/qtumlited' + EXEEXT
 
 if EXEEXT == ".exe" and "-win" not in opts:
     # https://github.com/bitcoin/bitcoin/commit/d52802551752140cf41f0d9a225a43e84404d3e9
@@ -159,37 +159,37 @@ testScripts = [
     'listsinceblock.py',
     'p2p-leaktests.py',
 
-    #qtum
-    'qtum-8mb-block.py',
-    'qtum-dgp-gas-price-lingering-mempool-tx.py',
-    'qtum-opcreate.py',
-    'qtum-block-header.py',
-    'qtum-dgp.py',
-    'qtum-pos.py',
-    'qtum-callcontract.py',
-    'qtum-gas-limit.py',
-    'qtum-pos-segwit.py',
-    'qtum-combined-outputs-exceed-gas-limit.py',
-    'qtum-globals-state-changer.py',
-    'qtum-sendtocontract.py',
-    'qtum-condensing-txs.py',
-    'qtum-identical-refunds.py',
-    'qtum-soft-block-gas-limits.py',
-    'qtum-createcontract.py',
-    'qtum-many-value-refunds-from-same-tx.py',
-    'qtum-spend-op-call.py',
-    'qtum-create-eth-op-code.py',
-    'qtum-no-exec-call-disabled.py',
-    'qtum-state-root.py',
-    'qtum-dgp-block-size-restart.py',
-    'qtum-null-sender.py',
-    'qtum-transaction-prioritization.py',
-    'qtum-dgp-block-size-sync.py',
-    'qtum-opcall.py',
-    'qtum-assign-mpos-fees-to-gas-refund.py',
-    'qtum-gas-limit-overflow.py',
-    'qtum-immature-coinstake-spend.py',
-    'qtum-ignore-mpos-participant-reward.py',
+    #qtumlite
+    'qtumlite-8mb-block.py',
+    'qtumlite-dgp-gas-price-lingering-mempool-tx.py',
+    'qtumlite-opcreate.py',
+    'qtumlite-block-header.py',
+    'qtumlite-dgp.py',
+    'qtumlite-pos.py',
+    'qtumlite-callcontract.py',
+    'qtumlite-gas-limit.py',
+    'qtumlite-pos-segwit.py',
+    'qtumlite-combined-outputs-exceed-gas-limit.py',
+    'qtumlite-globals-state-changer.py',
+    'qtumlite-sendtocontract.py',
+    'qtumlite-condensing-txs.py',
+    'qtumlite-identical-refunds.py',
+    'qtumlite-soft-block-gas-limits.py',
+    'qtumlite-createcontract.py',
+    'qtumlite-many-value-refunds-from-same-tx.py',
+    'qtumlite-spend-op-call.py',
+    'qtumlite-create-eth-op-code.py',
+    'qtumlite-no-exec-call-disabled.py',
+    'qtumlite-state-root.py',
+    'qtumlite-dgp-block-size-restart.py',
+    'qtumlite-null-sender.py',
+    'qtumlite-transaction-prioritization.py',
+    'qtumlite-dgp-block-size-sync.py',
+    'qtumlite-opcall.py',
+    'qtumlite-assign-mpos-fees-to-gas-refund.py',
+    'qtumlite-gas-limit-overflow.py',
+    'qtumlite-immature-coinstake-spend.py',
+    'qtumlite-ignore-mpos-participant-reward.py',
 ]
 
 

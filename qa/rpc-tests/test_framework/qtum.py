@@ -10,7 +10,7 @@ import time
 import struct
 
 # Default min gas price in satoshis
-QTUM_MIN_GAS_PRICE = 40
+QTUMLITE_MIN_GAS_PRICE = 40
 
 # For the dgp
 BLOCKS_BEFORE_PROPOSAL_EXPIRATION = 216

@@ -43,7 +43,7 @@ MY_VERSION = 70016  # past bip-31 for ping/pong
 MY_SUBVERSION = b"/python-mininode-tester:0.0.3/"
 MY_RELAY = 1 # from version 70001 onwards, fRelay should be appended to version messages (BIP37)
 
-COIN = 100000000 # 1 btc in satoshis
+COIN = 1000000000 # 1 btc in satoshis
 
 MAX_INV_SZ = 50000
 dgpMaxBlockBaseSize = 2000000

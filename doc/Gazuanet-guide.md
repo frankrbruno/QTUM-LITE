@@ -1,20 +1,20 @@
-# Qtum Sparknet Usage and Information
+# QtumLite Gazuanet Usage and Information
 
-Qtum is a decentralized blockchain project built on Bitcoin's UTXO model, but with support for Ethereum Virtual Machine based smart contracts. It achieves this through the revolutionary Account Abstraction Layer. For more general information about Qtum as well as links to join our community, go to https://qtum.org
+QtumLite is fork of Qtum which is a decentralized blockchain project built on Bitcoin's UTXO model, but with support for Ethereum Virtual Machine based smart contracts. It achieves this through the revolutionary Account Abstraction Layer. For more general information about Qtumlite as well as links to join our community, go to https://qtumlite.org
 
-Welcome to Qtum Sparknet, the first public testnet for the Qtum blockchain. Sparknet is designed primarily for developers, and as such documentation at this point will be technical and suited more for developers. The mainnet is expected to be released in September and will be suited for the general public. Testnet tokens do not hold any value and should not be traded for any monetary instruments. The testnet can be reset or forked at anytime as deemed necessary for development. Sparknet does not include support for Mutualized Proof Of Stake, or for the Decentralized Governance Protocol. Both of these features are implemented, and their code is available on alternative branches (check the pull requests), but have not been tested and proven stable enough to include in this testnet. They will be implemented in the 2nd public testnet for Qtum. 
+Welcome to Qtumlite Gazuanet, the first public testnet for the QtumLite blockchain. Gazuanet is designed primarily for developers, and as such documentation at this point will be technical and suited more for developers. The mainnet is expected to be released in the future and will be suited for the general public. Gazuanet tokens do not hold any value and should not be traded for any monetary instruments. The testnet can be reset or forked at anytime as deemed necessary for development. Gazuanet does not include support for Mutualized Proof Of Stake, or for the Decentralized Governance Protocol. Both of these features are implemented, and their code is available on alternative branches (check the pull requests), but have not been tested and proven stable enough to include in this net. 
 
-# Using Smart Contracts with Qtum
+# Using Smart Contracts with QtumLite
 
-The smart contract interface in Qtum still requires some technical knowledge. The GUI is not completed yet, so all smart contract interation must happen either using `qtum-cli` at the command line, or in the debug window of `qtum-qt`. 
+The smart contract interface in QtumLite still requires some technical knowledge. The GUI is not completed yet, so all smart contract interation must happen either using `qtumlite-cli` at the command line, or in the debug window of `qtumlite-qt`. 
 
 To demonstrate how to deploy and interact with a simple we will use this contract:
 
     pragma solidity ^0.4.0;
 
-    contract QtumTest {
+    contract QtumLiteTest {
        uint storedNumber;
-       function QtumTest() {
+       function QtumLiteTest() {
            storedNumber=1;
        }
        function setNumber(uint number) public{
@@ -161,23 +161,23 @@ The ABI value for `deposit` is d0e30db0 and the ABI value for `withdraw` is 3ccf
 
 This will send 10 tokens to the contract:
 
-    ./qtum-cli sendtocontract $CONTRACT d0e30db0 10
+    ./qtumlite-cli sendtocontract $CONTRACT d0e30db0 10
 
 And then, to withdraw them it's also very simple:
 
-    ./qtum-cli sendtocontract $CONTRACT 3ccfd60b
+    ./qtumlite-cli sendtocontract $CONTRACT 3ccfd60b
 
 If you want to control the exact address that the contract sends coins to, you can also explicitly specify the sender. Note that you must be capable of sending coins from that address (you can't use someone elses address). One of my wallet addresses is qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt, so I'll use that:
 
-    ./qtum-cli sendtocontract $CONTRACT 3ccfd60b 0 190000 0.0000001 qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt
+    ./qtumlite-cli sendtocontract $CONTRACT 3ccfd60b 0 190000 0.0000001 qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt
 
 Note that if you get the error "Sender address does not have any unspent outputs", then you should send some coins to that address (they must be spent in order to prove that you own that address). This can be accomplished with any amount of coins:
 
-    ./qtum-cli sendtoaddress qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt 0.001
+    ./qtumlite-cli sendtoaddress qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt 0.001
 
 There is no need to wait for this transaction to confirm, it can be followed immediately by the sendtocontract command:
 
-    ./qtum-cli sendtocontract $CONTRACT 3ccfd60b 0 190000 0.0000001 qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt
+    ./qtumlite-cli sendtocontract $CONTRACT 3ccfd60b 0 190000 0.0000001 qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt
 
 When creating this contract transaction, nothing will immediately happen, when the transaction is put into a block though a new transaction will appear in a block which will send any coins owned by the contract to the pubkeyhash address qZbjaE8N18ZU1m7851G7QGhvxKL74SRBTt
 
@@ -186,17 +186,17 @@ When creating this contract transaction, nothing will immediately happen, when t
 * Q: "I used `createcontract`, but can't call my contract and it's not in listcontract" A: You probably did not provide enough gas for the contract's constructor to be executed and it's code persisted in the blockchain. The vm.log file should confirm this by saying how much gas was needed
 * Q: "I sent a large amount of gas but I never got a refund" A: Refunds are generated from the coinstake transaction, so you must wait 500 blocks for the gas refund to mature before it can be spent again
 * Q: "I used -reindex and now my node is taking forever to resync" A: Currently when doing a reindex, all contracts are reprocessed, so in a chain with many contract executions this can add up to a significant amount of time. This will be made faster in the future, as well as the initial syncing speed of nodes
-* Q: "I think I found a bug in Qtum" A: Please report any bugs at https://github.com/qtumproject/qtum/issues
+* Q: "I think I found a bug in Qtumlite" A: Please report any bugs at https://github.com/qtumliteproject/qtumlite/issues
 
 
 
-# New Qtum RPC Commands
+# New Qtumlite RPC Commands
 
-Qtum supports all of the RPC commands supported by Bitcoin Core, but also includes the following commands unique to Qtum:
+QtumLite supports all of the RPC commands supported by Bitcoin Core, but also includes the following commands unique to QtumLite:
 
-* `createcontract` - This will create and deploy a new smart contract to the Qtum blockchain. This requires gas.
-* `callcontract` - This will interact with an already deployed smart contract on the Qtum blockchain, with all computation taking place off-chain and no persistence to the blockchain. This does not require gas
-* `sendtocontract` - This will interact with an already deployed smart contract on the Qtum blockchain. All computation takes place on-chain and any state changes will be persisted to the blockchain. This allows tokens to be sent to a smart contract. This requires gas.
+* `createcontract` - This will create and deploy a new smart contract to the QtumLite blockchain. This requires gas.
+* `callcontract` - This will interact with an already deployed smart contract on the QtumLite blockchain, with all computation taking place off-chain and no persistence to the blockchain. This does not require gas
+* `sendtocontract` - This will interact with an already deployed smart contract on the QtumLite blockchain. All computation takes place on-chain and any state changes will be persisted to the blockchain. This allows tokens to be sent to a smart contract. This requires gas.
 * `getaccountinfo` - This will show some low level information about a contract, including the contract's bytecode, stored data, and balance on the blockchain.
 * `listcontracts` - This will output a list of currently deployed contract addresses with their respective balance. This RPC call may change or be removed in the future.
 * `reservebalance` - This will reserve a set amount of coins so that they do not participate in staking. If you reserve as many or more coins than are in your wallet, then you will not participate at all in staking and block creation for the network.
@@ -205,11 +205,11 @@ Qtum supports all of the RPC commands supported by Bitcoin Core, but also includ
 * `fromhexaddress` - this will convert a hex address used in smart contracts to a standard Base58 pubkeyhash address
 
 
-# New Qtum Command Line Arguments
+# New QtumLite Command Line Arguments
 
-Qtum supports all of the usual command line arguments that Bitcoin Core supports. In addition it adds the following new command line arguments:
+QtumLite supports all of the usual command line arguments that Bitcoin Core supports. In addition it adds the following new command line arguments:
 
-* `-record-log-opcodes` - This will create a new log file in the Qtum data directory (usually ~/.qtum) named vmExecLogs.json, where any EVM LOG opcode is logged along with topics and data that the contract requested be logged. 
+* `-record-log-opcodes` - This will create a new log file in the QtumLite data directory (usually ~/.qtumlite) named vmExecLogs.json, where any EVM LOG opcode is logged along with topics and data that the contract requested be logged. 
 
 # Untested features
 
@@ -219,11 +219,11 @@ Some features included in Bitcoin Core have not been tested in it's porting to Q
 
 # EVM Smart Contract Changes and Limitations
 
-Because of Qtum's underlying technical differences, there are a few operations that can have different results or limitations when executed in Qtum than when compared to Ethereum. 
+Because of QtumLite's underlying technical differences, there are a few operations that can have different results or limitations when executed in QtumLite than when compared to Ethereum. 
 
 These include the following, though there may be others introduced in the future:  
 
-* The gas schedule for Qtum is different from Ethereum. Certain operations are more or less expensive. As such, gas cost estimators designed for Ethereum will not give accurate results for Qtum. We will develop our own gas estimating tools as well as fully documenting these differences at a later date. 
+* The gas schedule for QtumLite is different from Ethereum. Certain operations are more or less expensive. As such, gas cost estimators designed for Ethereum will not give accurate results for QtumLite. We will develop our own gas estimating tools as well as fully documenting these differences at a later date. 
 * `block.coinbase` or the `COINBASE` opcode currently is not supported and will only return 0. When MPoS is released in the 2nd testnet this should be functioning as expected
 * `block.number` will return the previous block height before this block containing the contract's execution
 * `block.difficulty` will return the previous block's difficulty
@@ -234,6 +234,6 @@ These include the following, though there may be others introduced in the future
 * Only 1000 vouts can be generated from a single contract execution. Sending coins to the same contract multiple times results in a single vout being created, so the limitation is effectively that coins can only be sent to up to 1000 unique contract or pubkeyhash addresses, including balance changes between contracts. If this limit is exceeded, an Out Of Gas exception is generated and all state changes are reverted. 
 * Contract executions can not happen within coinbase or coinstake transactions
 
-Additional documents for the overall design and expected results of various operations is available at the ITD repository here: https://github.com/qtumproject/qtum-itds
+Additional documents for the overall design and expected results of various operations is available at the ITD repository here: https://github.com/qtumliteproject/qtumlite-itds
 
 

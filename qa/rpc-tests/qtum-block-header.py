@@ -24,7 +24,7 @@ def find_unspent(node, amount):
     assert(False)
 
 
-class QtumBlockHeaderTest(ComparisonTestFramework):
+class QtumLiteBlockHeaderTest(ComparisonTestFramework):
     def __init__(self):
         super().__init__()
         self.num_nodes = 1
@@ -124,7 +124,7 @@ class QtumBlockHeaderTest(ComparisonTestFramework):
 
 
         # A block with a tx, but without updated state hashes
-        tx_hex = node.sendtocontract(contract_address, "00", 1, 100000, QTUM_MIN_GAS_PRICE/COIN, spendable_addresses.pop(-1), False)['raw transaction']
+        tx_hex = node.sendtocontract(contract_address, "00", 1, 100000, QTUMLITE_MIN_GAS_PRICE/COIN, spendable_addresses.pop(-1), False)['raw transaction']
         f = io.BytesIO(hex_str_to_bytes(tx_hex))
         tx = CTransaction()
         tx.deserialize(f)
@@ -171,4 +171,4 @@ class QtumBlockHeaderTest(ComparisonTestFramework):
 
 
 if __name__ == '__main__':
-    QtumBlockHeaderTest().main()
+    QtumLiteBlockHeaderTest().main()

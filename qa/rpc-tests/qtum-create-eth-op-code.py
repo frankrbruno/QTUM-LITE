@@ -4,11 +4,11 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.qtumlite import *
 from test_framework.address import *
 
 
-class QtumCreateEthOpCodeTest(BitcoinTestFramework):
+class QtumLiteCreateEthOpCodeTest(BitcoinTestFramework):
     def __init__(self):
         super().__init__()
         self.setup_clean_chain = True
@@ -130,7 +130,7 @@ class QtumCreateEthOpCodeTest(BitcoinTestFramework):
         self.node.generate(1)
         assert_equal(self.node.listcontracts()[self.test_contract_address], 100)
 
-        # Transfer 50 qtum from the contract via p2pkh to an address of our choice
+        # Transfer 50 qtumlite from the contract via p2pkh to an address of our choice
         receiver_address = self.node.getnewaddress()
         h160addr = str(base58_to_byte(receiver_address, 25)[1])[2:-1]
         data = "9e1a00aa"
@@ -141,7 +141,7 @@ class QtumCreateEthOpCodeTest(BitcoinTestFramework):
         assert_equal(self.node.listcontracts()[self.test_contract_address], 50)
         self.assert_address_with_value_in_unspents(receiver_address, 50)
 
-        # Transfer 50 qtum from the contract via OP_CALL to its parent contract (the Factory contract)
+        # Transfer 50 qtumlite from the contract via OP_CALL to its parent contract (the Factory contract)
         receiver_address = self.node.getnewaddress()
         h160addr = str(base58_to_byte(receiver_address, 25)[1])[2:-1]
         data = "9e1a00aa"
@@ -184,4 +184,4 @@ class QtumCreateEthOpCodeTest(BitcoinTestFramework):
         self.check_suicide_test()
 
 if __name__ == '__main__':
-    QtumCreateEthOpCodeTest().main()
+    QtumLiteCreateEthOpCodeTest().main()

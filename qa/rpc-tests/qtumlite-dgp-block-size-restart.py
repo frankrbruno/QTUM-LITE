@@ -4,7 +4,7 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.qtumlite import *
 from test_framework.address import *
 from test_framework.blocktools import *
 import sys
@@ -15,7 +15,7 @@ import random
 """
 Note, these tests do not test the functionality of the DGP template contract itself, for tests for the DGP template, see qtum-dgp.py
 """
-class QtumDGPActivation(BitcoinTestFramework):
+class QtumliteDGPActivation(BitcoinTestFramework):
     def __init__(self):
         super().__init__()
         self.setup_clean_chain = True
@@ -125,4 +125,4 @@ class QtumDGPActivation(BitcoinTestFramework):
 
 
 if __name__ == '__main__':
-    QtumDGPActivation().main()
+    QtumLiteDGPActivation().main()

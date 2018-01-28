@@ -4,11 +4,11 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.qtumlite import *
 from test_framework.address import *
 import time
 
-class QtumManyValueRefundsFromSameTxTest(BitcoinTestFramework):
+class QtumLiteManyValueRefundsFromSameTxTest(BitcoinTestFramework):
     def __init__(self):
         super().__init__()
         self.setup_clean_chain = True
@@ -43,4 +43,4 @@ class QtumManyValueRefundsFromSameTxTest(BitcoinTestFramework):
         assert_equal(self.node.getblockcount(), block_count+1)
 
 if __name__ == '__main__':
-    QtumManyValueRefundsFromSameTxTest().main()
+    QtumLiteManyValueRefundsFromSameTxTest().main()

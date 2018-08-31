@@ -17,7 +17,7 @@
 
 #include "chainparamsseeds.h"
 
-///////////////////////////////////////////// // qtum
+///////////////////////////////////////////// // qtumlite
 #include <libdevcore/SHA3.h>
 #include <libdevcore/RLP.h>
 #include "arith_uint256.h"
